@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TalentSprint cycle shop</title>
+    <style>
+        
+        table {
+            margin: 0 auto;
+            
+            border: 2px solid rgb(119, 118, 123); 
+        }
+
+        
+        th {
+            background-color: rgb(255, 190, 111);
+            color: rgb(61, 56, 70);
+            border: 2px solid rgb(237, 51, 59); 
+        }
+
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+       
+        input[type="submit"] {
+            background-color: rgb(237, 51, 59);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+       
+        input[type="text"] {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cycle shop</h1>
+    <table th:each="cycle : ${allCycles}">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Stock available</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td th:text="${cycle.brand}">Brand</td>
+                <td th:text="${cycle.numAvailable}">0</td>
+                <td>
+                    <form action="#" th:action="@{./{id}/borrow(id=${cycle.id})}" method="get">
+                        <input type="text" name="count">
+                        <input type="submit" value="BORROW">
+                    </form>
+                    <form action="#" th:action="@{./{id}/return(id=${cycle.id})}" method="get">
+                        <input type="text" name="count">
+                        <input type="submit" value="RETURN">
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
